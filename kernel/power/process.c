@@ -140,9 +140,9 @@ int freeze_processes(void)
 	error = try_to_freeze_tasks(true);
 	if (!error) {
 		__usermodehelper_set_disable_depth(UMH_DISABLED);
-		pr_cont("done.");
+		pr_debug("done.");
 	}
-	pr_cont("\n");
+	pr_debug("\n");
 	BUG_ON(in_atomic());
 
 	/*
@@ -176,9 +176,9 @@ int freeze_kernel_threads(void)
 	pm_nosig_freezing = true;
 	error = try_to_freeze_tasks(false);
 	if (!error)
-		pr_cont("done.");
+		pr_debug("done.");
 
-	pr_cont("\n");
+	pr_debug("\n");
 	BUG_ON(in_atomic());
 
 	if (error)
@@ -220,7 +220,7 @@ void thaw_processes(void)
 	usermodehelper_enable();
 
 	schedule();
-	pr_cont("done.\n");
+	pr_debug("done.\n");
 	trace_suspend_resume(TPS("thaw_processes"), 0, false);
 }
 
@@ -241,5 +241,5 @@ void thaw_kernel_threads(void)
 	read_unlock(&tasklist_lock);
 
 	schedule();
-	pr_cont("done.\n");
+	pr_debug("done.\n");
 }
