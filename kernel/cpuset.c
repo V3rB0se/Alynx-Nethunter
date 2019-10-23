@@ -698,7 +698,8 @@ static int generate_sched_domains(cpumask_var_t **domains,
 		      cpumask_intersects(cp->cpus_allowed, non_isolated_cpus)))
 			continue;
 
-		if (is_sched_load_balance(cp))
+		if (is_sched_load_balance(cp) &&
+		    !cpumask_empty(cp->effective_cpus))
 			csa[csn++] = cp;
 
 		/* skip @cp's subtree */
