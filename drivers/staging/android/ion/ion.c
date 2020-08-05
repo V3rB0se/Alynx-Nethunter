@@ -3,7 +3,7 @@
  * drivers/staging/android/ion/ion.c
  *
  * Copyright (C) 2011 Google, Inc.
- * Copyright (c) 2011-2018, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2011-2018, 2020, The Linux Foundation. All rights reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -421,8 +421,7 @@ static void ion_handle_get(struct ion_handle *handle)
 }
 
 /* Must hold the client lock */
-static struct ion_handle *ion_handle_get_check_overflow(
-					struct ion_handle *handle)
+static struct ion_handle* ion_handle_get_check_overflow(struct ion_handle *handle)
 {
 	if (atomic_read(&handle->ref.refcount) + 1 == 0)
 		return ERR_PTR(-EOVERFLOW);
@@ -430,9 +429,13 @@ static struct ion_handle *ion_handle_get_check_overflow(
 	return handle;
 }
 
-int ion_handle_put_nolock(struct ion_handle *handle)
+static int ion_handle_put_nolock(struct ion_handle *handle)
 {
-	return kref_put(&handle->ref, ion_handle_destroy);
+	int ret;
+
+	ret = kref_put(&handle->ref, ion_handle_destroy);
+
+	return ret;
 }
 
 int ion_handle_put(struct ion_handle *handle)
@@ -746,9 +749,9 @@ static int __ion_phys(struct ion_client *client, struct ion_handle *handle,
 			mutex_unlock(&client->lock);
 		return -ENODEV;
 	}
+	ret = buffer->heap->ops->phys(buffer->heap, buffer, addr, len);
 	if (lock_client)
 		mutex_unlock(&client->lock);
-	ret = buffer->heap->ops->phys(buffer->heap, buffer, addr, len);
 	return ret;
 }
 
@@ -1475,7 +1478,6 @@ static int __ion_share_dma_buf_fd(struct ion_client *client,
 	fd = dma_buf_fd(dmabuf, O_CLOEXEC);
 	if (fd < 0)
 		dma_buf_put(dmabuf);
-
 	return fd;
 }
 
@@ -1492,8 +1494,7 @@ int ion_share_dma_buf_fd_nolock(struct ion_client *client,
 }
 
 static struct ion_handle *__ion_import_dma_buf(struct ion_client *client,
-					       struct dma_buf *dmabuf,
-					       bool lock_client)
+				      struct dma_buf *dmabuf, bool lock_client)
 {
 	struct ion_buffer *buffer;
 	struct ion_handle *handle;
@@ -1542,14 +1543,14 @@ end:
 }
 
 struct ion_handle *ion_import_dma_buf(struct ion_client *client,
-				      struct dma_buf *dmabuf)
+						struct dma_buf *dmabuf)
 {
 	return __ion_import_dma_buf(client, dmabuf, true);
 }
 EXPORT_SYMBOL(ion_import_dma_buf);
 
-struct ion_handle *__ion_import_dma_buf_fd(struct ion_client *client, int fd,
-					   bool lock)
+static struct ion_handle *__ion_import_dma_buf_fd(struct ion_client *client,
+							int fd, bool lock_client)
 {
 	struct dma_buf *dmabuf;
 	struct ion_handle *handle;
@@ -1558,7 +1559,7 @@ struct ion_handle *__ion_import_dma_buf_fd(struct ion_client *client, int fd,
 	if (IS_ERR(dmabuf))
 		return ERR_CAST(dmabuf);
 
-	handle = __ion_import_dma_buf(client, dmabuf, lock);
+	handle = __ion_import_dma_buf(client, dmabuf, lock_client);
 	dma_buf_put(dmabuf);
 	return handle;
 }
@@ -1569,16 +1570,9 @@ struct ion_handle *ion_import_dma_buf_fd(struct ion_client *client, int fd)
 }
 EXPORT_SYMBOL(ion_import_dma_buf_fd);
 
-struct ion_handle *ion_import_dma_buf_fd_nolock(struct ion_client *client,
-						int fd)
+struct ion_handle *ion_import_dma_buf_fd_nolock(struct ion_client *client, int fd)
 {
 	return __ion_import_dma_buf_fd(client, fd, false);
-}
-
-struct ion_handle *ion_import_dma_buf_nolock(struct ion_client *client,
-					     struct dma_buf *dmabuf)
-{
-	return __ion_import_dma_buf(client, dmabuf, false);
 }
 
 static int ion_sync_for_device(struct ion_client *client, int fd)
@@ -1691,11 +1685,11 @@ static long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			mutex_unlock(&client->lock);
 			return PTR_ERR(handle);
 		}
-		data.fd.fd = ion_share_dma_buf_fd(client, handle);
+		data.fd.fd = ion_share_dma_buf_fd_nolock(client, handle);
 		ion_handle_put_nolock(handle);
+		mutex_unlock(&client->lock);
 		if (data.fd.fd < 0)
 			ret = data.fd.fd;
-		mutex_unlock(&client->lock);
 		break;
 	}
 	case ION_IOC_IMPORT:
