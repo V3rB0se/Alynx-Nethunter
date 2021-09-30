@@ -1698,7 +1698,6 @@ lim_populate_peer_rate_set(tpAniSirGlobal pMac,
 		for (i = 0; i < tempRateSet.numRates; i++) {
 			min = 0;
 			val = 0xff;
-			isArate = 0;
 			for (j = 0;
 			     (j < tempRateSet.numRates)
 			     && (j < SIR_MAC_RATESET_EID_MAX); j++) {
@@ -1708,31 +1707,38 @@ lim_populate_peer_rate_set(tpAniSirGlobal pMac,
 					min = j;
 				}
 			}
-			if (sirIsArate(tempRateSet.rate[min] & 0x7f))
+			if (sirIsArate(tempRateSet.rate[min] & 0x7f)) {
 				isArate = 1;
+			} else if (sirIsBrate(tempRateSet.rate[min] & 0x7f)) {
+				isArate = 0;
+			} else {
+				pe_debug("%d is neither 11a nor 11b rate",
+					 tempRateSet.rate[min]);
+				tempRateSet.rate[min] = 0xff;
+				continue;
+			}
+			if (tempRateSet.rate[min] == pRates->llaRates[aRateIndex] ||
+			    tempRateSet.rate[min] == pRates->llbRates[bRateIndex]) {
+				pe_debug("Duplicate rate: %d", tempRateSet.rate[min]);
+				tempRateSet.rate[min] = 0xff;
+				continue;
+			}
 			/*
 			 * HAL needs to know whether the rate is basic rate or not, as it needs to
 			 * update the response rate table accordingly. e.g. if one of the 11a rates is
 			 * basic rate, then that rate can be used for sending control frames.
 			 * HAL updates the response rate table whenever basic rate set is changed.
 			 */
-			if (basicOnly) {
-				if (tempRateSet.rate[min] & 0x80) {
-					if (isArate)
-						pRates->llaRates[aRateIndex++] =
-							tempRateSet.rate[min];
-					else
-						pRates->llbRates[bRateIndex++] =
-							tempRateSet.rate[min];
-				}
-			} else {
-				if (isArate)
-					pRates->llaRates[aRateIndex++] =
-						tempRateSet.rate[min];
-				else
-					pRates->llbRates[bRateIndex++] =
-						tempRateSet.rate[min];
+			if (basicOnly && !(tempRateSet.rate[min] & 0x80)) {
+				tempRateSet.rate[min] = 0xff;
+				continue;
 			}
+			if (isArate && aRateIndex < SIR_NUM_11A_RATES)
+				pRates->llaRates[aRateIndex++] =
+						tempRateSet.rate[min];
+			else if (bRateIndex < SIR_NUM_11B_RATES)
+				pRates->llbRates[bRateIndex++] =
+						tempRateSet.rate[min];
 			tempRateSet.rate[min] = 0xff;
 		}
 	}
