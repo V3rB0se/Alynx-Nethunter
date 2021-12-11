@@ -110,6 +110,7 @@ struct bd_data {
 	u32 bd_temp_enable;	/* for UI setting interface */
 
 	bool lowerbd_reached;
+	bool bd_temp_dry_run;
 };
 
 struct chg_drv {
@@ -549,7 +550,9 @@ static void bd_init(struct bd_data *bd_state, struct device *dev)
 				   &bd_state->bd_resume_time);
 	if (ret < 0)
 		bd_state->bd_resume_time = 0;
-
+		
+	bd_state->bd_temp_dry_run =
+		 of_property_read_bool(dev->of_node, "google,bd-temp-dry-run");
 
 	/* also call to resume charging */
 	bd_reset(bd_state);
@@ -627,6 +630,9 @@ static int bd_recharge_logic(struct bd_data *bd_state, int val)
 	int disable_charging = 0;
 
 	if (!bd_state->triggered)
+		return 0;
+		
+	if (bd_state->bd_temp_dry_run)
 		return 0;
 
 	if (bd_state->bd_drainto_soc && bd_state->bd_recharge_soc) {
@@ -2118,6 +2124,42 @@ static ssize_t set_bd_resume_soc(struct device *dev,
 }
 static DEVICE_ATTR(bd_resume_soc, 0660, show_bd_resume_soc, set_bd_resume_soc);
 
+static ssize_t
+show_bd_temp_dry_run(struct device *dev,
+			struct device_attribute *attr, char *buf)
+{
+	struct chg_drv *chg_drv = dev_get_drvdata(dev);
+
+	return scnprintf(buf, PAGE_SIZE, "%d\n",
+			chg_drv->bd_state.bd_temp_dry_run);
+}
+
+static ssize_t set_bd_temp_dry_run(struct device *dev,
+				      struct device_attribute *attr,
+				      const char *buf, size_t count)
+{
+	struct chg_drv *chg_drv = dev_get_drvdata(dev);
+	bool dry_run = chg_drv->bd_state.bd_temp_dry_run;
+	int ret = 0, val;
+
+	ret = kstrtoint(buf, 0, &val);
+	if (ret < 0)
+		return ret;
+
+	if (val > 0 && !dry_run) {
+		chg_drv->bd_state.bd_temp_dry_run = true;
+	} else if (val <= 0 && dry_run) {
+		chg_drv->bd_state.bd_temp_dry_run = false;
+		if (chg_drv->bd_state.triggered)
+			bd_reset(&chg_drv->bd_state);
+	}
+
+	return count;
+}
+
+static DEVICE_ATTR(bd_temp_dry_run, 0660,
+		   show_bd_temp_dry_run, set_bd_temp_dry_run);
+
 static ssize_t bd_clear_store(struct device *dev,
 			      struct device_attribute *attr,
 			      const char *buf, size_t count)
@@ -2514,7 +2556,15 @@ static int google_charger_probe(struct platform_device *pdev)
 	// TODO: move to debugfs
 	ret = device_create_file(&pdev->dev, &dev_attr_tier_ovc);
 	if (ret != 0) {
-		pr_err("Failed to create tier_ovc files, ret=%d\n", ret);
+		pr_err("Failed to create tier_ovc files, ret=%d\n",
+		       ret);
+		return ret;
+	}
+	
+	ret = device_create_file(chg_drv->device, &dev_attr_bd_temp_dry_run);
+	if (ret != 0) {
+		pr_err("Failed to create bd_temp_dry_run files, ret=%d\n",
+		       ret);
 		return ret;
 	}
 
