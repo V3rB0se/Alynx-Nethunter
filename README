@@ -1,8 +1,9 @@
-# Lynx Nethuner Kernel
+ Lynx Nethuner Kernel
 
-	#Working
+	Working
 	
-	<ul>Atheros Devices 	
+	<ul>
+	Atheros Devices 	
 		<li>Atheros 5xxx wireless cards support</li>
 		<li>Atheros 5xxx PCI bus support (not a wireless)</li>
 		<li>Linux Community AR9170 802.11n USB support</li>
