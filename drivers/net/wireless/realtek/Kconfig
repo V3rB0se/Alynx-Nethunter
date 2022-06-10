@@ -1,18 +1,34 @@
-config WLAN_VENDOR_REALTEK
-	bool "Realtek devices"
-	default y
+#
+# RTWIFI Wireless LAN device configuration
+#
+config RTWIFI
+	tristate "RTL8723AU/RTL8188[CR]U/RTL819[12]CU (mac80211) support"
+	depends on MAC80211 && USB
 	---help---
-	  If you have a wireless card belonging to this class, say Y.
+	  This is an alternative driver for various Realtek RTL8XXX
+	  parts written to utilize the Linux mac80211 stack.
+	  The driver is known to work with a number of RTL8723AU,
+	  RL8188CU, RTL8188RU, RTL8191CU, and RTL8192CU devices
 
-	  Note that the answer to this question doesn't directly affect the
-	  kernel: saying N will just cause the configurator to skip all
-	  the questions about  cards. If you say Y, you will be asked for
-	  your specific card in the following questions.
+	  This driver is under development and has a limited feature
+	  set. In particular it does not yet support 40MHz channels
+	  and power management. However it should have a smaller
+	  memory footprint than the vendor drivers and benefits
+	  from the in kernel mac80211 stack.
 
-if WLAN_VENDOR_REALTEK
+	  It can coexist with drivers from drivers/staging/rtl8723au,
+	  drivers/staging/rtl8192u, and drivers/net/wireless/rtlwifi,
+	  but you will need to control which module you wish to load.
 
-source "drivers/net/wireless/realtek/rtl818x/Kconfig"
-source "drivers/net/wireless/realtek/rtlwifi/Kconfig"
-source "drivers/net/wireless/realtek/rtl8xxxu/Kconfig"
+	  To compile this driver as a module, choose M here: the module will
+	  be called r8xxxu. If unsure, say N.
 
-endif # WLAN_VENDOR_REALTEK
+config RTWIFI_EXPERIMENTAL
+	bool "Include support for Realtek 8xxx USB devices (EXPERIMENTAL)"
+	depends on RTWIFI
+	---help---
+	  This option enables detection of Realtek 8723/8188/8191/8192 WiFi
+	  USB devices which is put together recently for testing purposes.
+	  Feel free to report issues at GitHub if you'd encounter problems.
+
+	  Thanks!
