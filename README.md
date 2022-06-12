@@ -5,12 +5,8 @@
 <br>
 <h1 id="title" align="center">Alynx Nethunter Kernel</h1>
 <br>
-<p id="description" align="center">=== NetHunter kernel with all supported features nethunter offers. compiled with compiled with Clang 12 ===</p>
+<p id="description" align="center">NetHunter kernel with all supported features nethunter offers. compiled using Clang 12</p>
 
-# Lynx Nethuner Kernel
-
-	#Working
-	
 	<ul>Atheros Devices 	
 		<li>Atheros 5xxx wireless cards support</li>
 		<li>Atheros 5xxx PCI bus support (not a wireless)</li>
@@ -19,7 +15,6 @@
 		<li>Atheros ath6kl USB support</li>
 		<li>Atheros AR5523 wireless driver support</li>
 	</ul>
-
 	<ul>
 		MediaTek devices
 		<li>MediaTek MT7601U (USB) support</li>
