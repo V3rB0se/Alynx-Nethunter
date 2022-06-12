@@ -1,88 +1,59 @@
 
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/imgs/wiki/kalinethunter_logo.png" alt="project-image"></p>
+<p ><img src="https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/imgs/wiki/kalinethunter_logo.png" alt="project-image"></p>
 <br>
-<h1 id="title" align="center">Alynx Nethunter Kernel</h1>
+<h1 id="title">Alynx Nethunter Kernel</h1>
 <br>
-<p id="description" align="center">NetHunter kernel with all supported features nethunter offers. compiled using Clang 12</p>
+<p id="description">NetHunter kernel with all supported features NetHunter offers.</p>
 
-	<ul>Atheros Devices 	
-		<li>Atheros 5xxx wireless cards support</li>
-		<li>Atheros 5xxx PCI bus support (not a wireless)</li>
-		<li>Linux Community AR9170 802.11n USB support</li>
-		<li>Atheros AR5523 wireless driver support</li>
-		<li>Atheros ath6kl USB support</li>
-		<li>Atheros AR5523 wireless driver support</li>
-	</ul>
-	<ul>
-		MediaTek devices
-		<li>MediaTek MT7601U (USB) support</li>
-	</ul>
+## Supported Devices
 
-	<ul>
-		Ralink devices
-		<li>Ralink rt2500 (USB) support</li>
-		<li>Ralink rt2501/rt73 (USB) support</li>
-		<li>Ralink rt27xx/rt28xx/rt30xx (USB) support</li>
-		<li>rt33xx devices</li>
-		<li>rt35xx devices</li>
-		<li>rt3573 devices</li>
-		<li>rt55xx devices</li>
-	</ul>
-	<ul>
-		Realtek Devices
-		<li>RTL8188EUS</li>
-		<li>RTL8723AU</li>
-		<li>RTL8191CU</li>
-		<li>RTL8192CU</li>
-		<li>RTL8192CR</li>
-	</ul>
+ - Pixel 3 (blueline) Stock / PixelDust rom / CAF rom 
+ - Pixel 3xl (crosshatch) Stock / PixelDust rom / CAF rom 
 
-	<ul>
-		ZyDAS devices
-		<li>USB ZD1201 based Wireless device support</li>
-		<li>ZyDAS ZD1211/ZD1211B USB-wireless support</li>
-	</ul>
+## Features
 
-	
-
-	
-	#Not Working
-	Atheros Ar9271 (tplink wn722n v1) 	
-	+ (NETHUNTER USB FUNCTIONS due to compile time error's)
+ 1. Wifi Injection. (tested on wn722n v1 and v3 working perfectly well)
+ 2. Hid Injection. (not tested)
+ 3. USB Arsenal.
+ 4. RTL-SDR. (not tested)
 
 
-
-#Why
-	
- 	The main goal was to achieve working wifi adapter capapble of monitor state. it took me 1 month to get it working. i read many guides but none of them worked. i thought maybe i should create a proper guide on how you can compile the kernel yourself. so, without wasting much of your precious time lets get started.
-
-#Guide 
-
-i assume you're already using a linux distro 
-create a working directory let's say in the home directory 
-
-Working DIrectory 
-
-cd $HOME && mkdir kernel 
-
-Clone the kernel
-
-git clone https://github.com/v3rb0se/
-
-(or)
-
-Download the zip file (i'll go with this)
-
-mv downloaded_kernel.zip $HOME/WORKING/kernel/ && unzip downloaded_kernel.zip && rm download_kernel.zip
+| WIfi Injection | HID Injection  | USB Arsenal | RTL-SDR |
+|----------------|----------------|-------------|---------|
+|<center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> |
 
 
-Download the required toolchains 
+## Vendors
 
-in my case i use this toolchain
+| Atheros | Realtek | Ralink | Mediatek | ZyDAS |
+|---------|---------|--------|----------|-------|
+|<center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center> | <center><img align="center" src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" width="20px"></center>
+ 
+## Screenshots.
+Taken from pixel 3 
+<h5>Device</h5>
+<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/phone.png" width="300px">
 
+<h5>Interface</h5>
+<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/nethunter.png" width="300px">
 
-(working) 
+<h5>Wireless Testing</h5>
+<p>1. Tp-Link WN722N v1</p>
+<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/ath9k.png" width="300px">
+
+<p>2. Tp-Link WN722N v3</p>
+<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/rtl8188.png" width="300px">
+
+## Contribution.
+
+[Pixel Dust Project](https://github.com/PixelDust-Devices)
+
+[Kimocoder](https://github.com/kimocoder)
+
+[Darkar25](https://github.com/Darkar25)
+
+[Matthias](https://github.com/Darkar25)
 
 
