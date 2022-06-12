@@ -1,7 +1,7 @@
 
 
 
-<p ><img src="https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/imgs/wiki/kalinethunter_logo.png" alt="project-image"></p>
+<p ><img src="https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/imgs/wiki/kalinethunter_logo.png" width="1000px" alt="project-image"></p>
 <br>
 <h1 id="title">Alynx Nethunter Kernel</h1>
 <br>
@@ -39,19 +39,21 @@
 <br>
 
 ## Screenshots.
-Taken from pixel 3 
+
 <h5>Device</h5>
-<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/phone.png" width="300px">
+Pixel 3 
 
-<h5>Interface</h5>
-<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/nethunter.png" width="300px">
 
-<h5>Wireless Testing</h5>
-<p>1. Tp-Link WN722N v1</p>
-<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/ath9k.png" width="300px">
 
-<p>2. Tp-Link WN722N v3</p>
-<img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/rtl8188.png" width="300px">
+|Settings| Nethunter Interface |
+|--|--|
+| <img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/phone.png" width="300px">| <img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/nethunter.png" width="300px">
+
+
+
+|Tplink wn722n v1| Tplink wn722n v3 |
+|--|--|
+| <img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/ath9k.png" width="300px">| <img src="https://raw.githubusercontent.com/ImageHostx/ImageHostx.github.io/main/rtl8188.png" width="300px">
 
 <br>
 <br>
