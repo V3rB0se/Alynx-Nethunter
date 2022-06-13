@@ -59,12 +59,18 @@ Pixel 3
 
 ## Contribution.
 
-[Pixel Dust Project](https://github.com/PixelDust-Devices)
 
-[Kimocoder](https://github.com/kimocoder)
+| [Kimocoder](https://github.com/kimocoder) |[PixelDust Rom](https://github.com/PixelDust-Devices)|[Darkar25](https://github.com/Darkar25)|[Matthias](https://github.com/Darkar25)|
+|-------|---------------------|---------|--------------|
+|<img src="https://avatars.githubusercontent.com/u/4252297?v=4" width="100px">|<img src="https://avatars.githubusercontent.com/u/59805901?s=200&v=4" width="100px">|<img src="https://avatars.githubusercontent.com/u/59805901?s=200&v=4" width="100px">|<img src="https://avatars.githubusercontent.com/u/59805901?s=200&v=4" width="100px">
 
-[Darkar25](https://github.com/Darkar25)
 
-[Matthias](https://github.com/Darkar25)
+## Version Information
+
+
+|Status | Stable Release Date | Created | Last Updated |
+|-------|---------------------|---------|--------------|
+| Stable | 12/06/2022 | 13/06/2022 | 13/06/2022 |
+
 
 
