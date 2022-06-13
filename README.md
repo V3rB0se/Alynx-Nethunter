@@ -1,7 +1,7 @@
 
 
 
-<p ><img src="https://raw.githubusercontent.com/v1s1t0r1sh3r3/airgeddon/master/imgs/wiki/kalinethunter_logo.png" width="1000px" alt="project-image"></p>
+<p ><img src="https://raw.githubusercontent.com/AlynxHost/Alynxhost.github.io/main/logox.png" width="1000px" alt="project-image"></p>
 <br>
 <h1 id="title">Alynx Nethunter Kernel</h1>
 <br>
