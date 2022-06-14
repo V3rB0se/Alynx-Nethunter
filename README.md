@@ -60,7 +60,7 @@ Pixel 3
 ## Contribution.
 
 
-| [Kimocoder](https://github.com/kimocoder) |[PixelDust Rom](https://github.com/PixelDust-Devices)|[Darkar25](https://github.com/Darkar25)|[Matthias](https://github.com/Darkar25)|
+| [Kimocoder](https://github.com/kimocoder) |[PD ROM](https://github.com/PixelDust-Devices)|[Darkar25](https://github.com/Darkar25)|[Matthias](https://github.com/Darkar25)|
 |-------|---------------------|---------|--------------|
 |<img src="https://avatars.githubusercontent.com/u/4252297?v=4" width="100px">|<img src="https://avatars.githubusercontent.com/u/59805901?s=200&v=4" width="100px">|<img src="https://avatars.githubusercontent.com/u/59805901?s=200&v=4" width="100px">|<img src="https://avatars.githubusercontent.com/u/59805901?s=200&v=4" width="100px">
 
@@ -68,7 +68,7 @@ Pixel 3
 ## Version Information
 
 
-|Status | Stable Release Date | Created | Last Updated |
+|Status | SR-Date | Created | Updated |
 |-------|---------------------|---------|--------------|
 | Stable | 12/06/2022 | 13/06/2022 | 13/06/2022 |
 
