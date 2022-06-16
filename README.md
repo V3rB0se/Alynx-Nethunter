@@ -15,9 +15,10 @@
 
 ## Features
  1. Internal wifi monitor mode (frame injection not working)
- 2. Wifi Injection. 
- 3. SDR features. 
- 4. USB Arsenal.
+ 2. Wifi Injection
+ 3. SDR
+ 4. HID
+ 5. USB Gadgets
 
 
 | WIfi Injection | HID Injection  | USB Arsenal | RTL-SDR |
