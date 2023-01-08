@@ -1108,7 +1108,7 @@ tSirRetStatus populate_dot11f_rrm_ie(tpAniSirGlobal pMac,
 				tpPESession psessionEntry);
 
 void populate_mdie(tpAniSirGlobal pMac,
-		tDot11fIEMobilityDomain * pDot11f, uint8_t mdie[]);
+		tDot11fIEMobilityDomain * pDot11f, uint8_t mdie[SIR_MDIE_SIZE]);
 void populate_ft_info(tpAniSirGlobal pMac, tDot11fIEFTInfo *pDot11f);
 
 void populate_dot11f_assoc_rsp_rates(tpAniSirGlobal pMac,

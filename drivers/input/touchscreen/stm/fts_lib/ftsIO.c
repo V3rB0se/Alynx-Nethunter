@@ -112,7 +112,7 @@ struct device *getDev(void)
   * slave
   * @return client if it was previously set or NULL in all the other cases
   */
-struct i2c_client *getClient()
+struct i2c_client *getClient(void)
 {
 	if (client != NULL)
 		return (struct i2c_client *)client;
