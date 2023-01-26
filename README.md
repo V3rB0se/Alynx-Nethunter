@@ -10,8 +10,8 @@
 
 ## Supported Devices
 
-- Pixel 3 (blueline) Stock / PixelDust rom / CAF rom 
-- Pixel 3xl (crosshatch) Stock / PixelDust rom / CAF rom 
+- Pixel 3 (blueline) Stock / PixelDust
+- Pixel 3xl (crosshatch) Stock / PixelDust 
 
 ## Features
  1. Internal wifi monitor mode (frame injection not working)
